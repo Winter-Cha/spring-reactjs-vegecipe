@@ -1,20 +1,27 @@
 buildscript {
     ext {
         springBootVersion = '2.2.5.RELEASE'
+        mooworkVersion = '1.3.1'
     }
     repositories {
         mavenCentral()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("com.moowork.gradle:gradle-node-plugin:${mooworkVersion}")
     }
 }
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.moowork.node'
 
 
 group 'com.vegecipe.com'
@@ -28,5 +35,59 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.projectlombok:lombok')
+    compile('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+
+node {
+    /* gradle-node-plugin configuration
+       https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
+       Task name pattern:
+       ./gradlew npm_<command> Executes an NPM command.
+    */
+    // Version of node to use.
+    version = '10.14.1'
+    // Version of npm to use.
+    npmVersion = '6.4.1'
+    // If true, it will download node using above parameters.
+    // If false, it will try to use globally installed node.
+    download = true
+}
+
+npm_run_build {
+    //inputs.file 'node_modules/.bin/webpack'
+    inputs.file 'package.json'
+    inputs.file 'package-lock.json'
+}
+assemble.dependsOn npm_run_build
+
+//task npm_run_build(type: Exec) {
+//    inputs.file("package.json")
+//    inputs.file("package-lock.json")
+//    //outputs.dir("$buildDir/build")
+//
+//    // NOTE: Add inputs.file("webpack.config.js") for projects that have it
+//    inputs.file("webpack.config.js")
+//    commandLine "$projectDir/node_modules/.bin/webpack"
+//}
+
+//
+//
+//task buildReactApp(type: NodeTask, dependsOn: 'npmInstall') {
+//    script = project.file('node_modules/.bin/webpack-dev-server')
+//    args = [
+//            '--mode', 'development',
+//            '--entry', './src/main/js/app.js',
+//            '-o', './src/main/resources/static/built/bundle.js'
+//    ]
+//}
+//
+//processResources.dependsOn 'buildReactApp'
+
+clean.delete << file('node_modules')
+clean.delete << file('src/main/resources/static/built')
