@@ -1,2 +1,9 @@
 # Project exclude paths
-/.gradle/
+.gradle
+.idea
+node_modules
+build
+npm-debug.log
+.env
+.DS_Store
+application-oauth.properties
