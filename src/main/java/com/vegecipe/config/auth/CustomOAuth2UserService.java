@@ -1,5 +1,6 @@
 package com.vegecipe.config.auth;
 
+import com.vegecipe.config.auth.dto.OAuthAttributes;
 import com.vegecipe.config.auth.dto.SessionUser;
 import com.vegecipe.domain.user.User;
 import com.vegecipe.domain.user.UserRepository;

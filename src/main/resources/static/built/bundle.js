@@ -41325,7 +41325,7 @@ var Header = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-        className: "main-header navbar navbar-expand-md navbar-light navbar-orange"
+        className: "main-header navbar navbar-expand-md navbar-light navbar-white"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -41400,75 +41400,30 @@ var Header = /*#__PURE__*/function (_Component) {
         className: "dropdown-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "media"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "../../dist/img/user1-128x128.jpg",
-        alt: "User Avatar",
-        className: "img-size-50 mr-3 img-circle"
-      }), ">", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "media-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "dropdown-item-title"
-      }, "Brad Diesel", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "float-right text-sm text-danger"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-star"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-sm"
-      }, "Call me whenever you can..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-sm text-muted"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-clock mr-1"
-      }), " 4 Hours Ago")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-block btn-primary",
+        type: "button"
+      }, "Google Lo2223333gin"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-divider"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
         className: "dropdown-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "media"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "../../dist/img/user8-128x128.jpg",
-        alt: "User Avatar",
-        className: "img-size-50 img-circle mr-3"
-      }), ">", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "media-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "dropdown-item-title"
-      }, "John Pierce", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "float-right text-sm text-muted"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-star"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-sm"
-      }, "I got your message bro"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-sm text-muted"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-clock mr-1"
-      }), " 4 Hours Ago")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-block btn-primary",
+        type: "button"
+      }, "Google Login"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-divider"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
         className: "dropdown-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "media"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "../../dist/img/user3-128x128.jpg",
-        alt: "User Avatar",
-        className: "img-size-50 img-circle mr-3"
-      }), ">", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "media-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "dropdown-item-title"
-      }, "Nora Silvester", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "float-right text-sm text-warning"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-star"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-sm"
-      }, "The subject goes here"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-sm text-muted"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-clock mr-1"
-      }), " 4 Hours Ago")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-block btn-primary",
+        type: "button"
+      }, "Google Login"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-divider"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",

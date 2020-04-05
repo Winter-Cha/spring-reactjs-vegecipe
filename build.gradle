@@ -38,19 +38,18 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-oauth2-client')
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    /*compile('org.springframework.boot:spring-boot-starter-thymeleaf')*/
+    compile('org.springframework.boot:spring-boot-starter-mustache')
     compile('org.projectlombok:lombok')
     compile('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    compile("org.springframework.boot:spring-boot-devtools")
 }
 
 
+/*
 node {
-    /* gradle-node-plugin configuration
-       https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
-       Task name pattern:
-       ./gradlew npm_<command> Executes an NPM command.
-    */
     // Version of node to use.
     version = '10.14.1'
     // Version of npm to use.
@@ -59,13 +58,18 @@ node {
     // If false, it will try to use globally installed node.
     download = true
 }
+*/
 
+/*
 npm_run_build {
     //inputs.file 'node_modules/.bin/webpack'
     inputs.file 'package.json'
     inputs.file 'package-lock.json'
+    inputs.file("webpack.config.js")
+    outputs.cacheIf { true }
 }
 assemble.dependsOn npm_run_build
+*/
 
 //task npm_run_build(type: Exec) {
 //    inputs.file("package.json")
@@ -90,5 +94,5 @@ assemble.dependsOn npm_run_build
 //
 //processResources.dependsOn 'buildReactApp'
 
-clean.delete << file('node_modules')
-clean.delete << file('src/main/resources/static/built')
+//clean.delete << file('node_modules')
+//clean.delete << file('src/main/resources/static/built')

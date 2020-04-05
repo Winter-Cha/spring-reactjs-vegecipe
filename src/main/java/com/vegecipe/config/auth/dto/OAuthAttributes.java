@@ -1,4 +1,4 @@
-package com.vegecipe.config.auth;
+package com.vegecipe.config.auth.dto;
 
 import com.vegecipe.domain.user.Role;
 import com.vegecipe.domain.user.User;
