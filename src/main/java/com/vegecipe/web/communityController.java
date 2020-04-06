@@ -19,8 +19,8 @@ public class communityController {
     @GetMapping("/community")
     public String community(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserPicture", user.getPicture());
         }
         model.addAttribute("posts", postsService.findAllDesc());
         return "pages/community";
@@ -29,8 +29,8 @@ public class communityController {
     @GetMapping("/posts/write")
     public String postWrite(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserPicture", user.getPicture());
         }
         return "pages/posts_write";
     }
@@ -38,8 +38,8 @@ public class communityController {
     @GetMapping("/posts/update/{id}")
     public String postUpdate(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("userPicture", user.getPicture());
+            model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("loginUserPicture", user.getPicture());
         }
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);

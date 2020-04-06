@@ -3,10 +3,10 @@
     <head lang="en">
         <meta charset="UTF-8"/>
         <title>Vegecipe</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <base href="/">
+        <base href="/" />
         <!-- Font Awesome -->
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
         <!-- Ionicons -->
@@ -85,57 +85,41 @@
                     <!--Right navbar links-->
                     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                         <!--Messages Dropdown Menu-->
-                        {{#userName}}
-                        <li class="nav-item dropdown">
-                            <span class="nav-link" id="user">{{userName}}</span>
+                        {{#loginUserName}}
+                        <li class="nav-item dropdown user-panel">
+                            <!--<span class="nav-link" id="user">{{loginUserName}}</span>-->
+                            <div class="image">
+                                <img src="{{loginUserPicture}}" class="img-circle elevation-2" alt="User Image"/>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  href="/logout">
                                 <i class="fas fa-sign-out-alt"></i>
                             </a>
                         </li>
-                        {{/userName}}
-                        {{^userName}}
+                        {{/loginUserName}}
+                        {{^loginUserName}}
                         <li class="nav-item dropdown">
                             <a class="nav-link" data-toggle="dropdown" href="#">
                                 <i class="fas fa-sign-in-alt"></i>
                             </a>
-                            {{/userName}}
+                        {{/loginUserName}}
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <a href="#" class="dropdown-item">
-                                    <!--Message Start-->
-                                    <div class="media">
-                                        <a href="/oauth2/authorization/google"
-                                           class="btn btn-block btn-primary active"
-                                           type="button"
-                                           role="button">
-                                            Google Login
-                                        </a>
-                                    </div>
-                                    <!--Message End-->
+
+                                <a href="/oauth2/authorization/google"
+                                   class="btn btn-block btn-primary active"
+                                   type="button"
+                                   role="button">
+                                    Google Login
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <!--Message Start-->
-                                    <div class="media">
-                                        <button class="btn btn-block btn-primary" type="button">
-                                                                                     Google Login
-                                                                                    </button>
-                                    </div>
-                                    <!--Message End-->
+                                <a href="/oauth2/authorization/naver"
+                                   class="btn btn-block btn-success active"
+                                   type="button"
+                                   role="button">
+                                    Naver Login
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <!--Message Start-->
-                                    <div class="media">
-                                        <button class="btn btn-block btn-primary" type="button">
-                                                                                     Google Login
-                                                                                    </button>
-                                    </div>
-                                    <!--Message End-->
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+
                             </div>
                         </li>
                     </ul>
