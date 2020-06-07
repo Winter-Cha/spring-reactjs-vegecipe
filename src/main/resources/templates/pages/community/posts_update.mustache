@@ -1,0 +1,88 @@
+{{#layout}}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>게시글 수정</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container">
+
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- jquery validation -->
+                    <div class="card card-outline card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Quick Example <small>jQuery Validation</small></h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form role="form" id="postWriteForm">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="title">글 번호</label>
+                                    <input type="text" name="title" class="form-control" id="id" value="{{post.id}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">제목</label>
+                                    <input type="text" name="title" class="form-control" id="title" value="{{post.title}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="author">작성자</label>
+                                    <input type="text" name="author" class="form-control" id="author" value="{{post.author}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="content">내용</label>
+                                    <textarea class="post-content" placeholder="" name="content" id="content"
+                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{post.content}}</textarea>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-danger float-right" id="btn-delete"><i class="fas fa-trash-alt"></i>삭제</button>
+                                <a href="/community" class="btn btn-default float-right"><i class="fas fa-pen-square"></i> 취소</a>
+                                <button type="button" class="btn btn-primary float-right" id="btn-update"><i class="fas fa-pen-square"></i>수정 완료</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!--/.col (left) -->
+                <!-- right column -->
+                <div class="col-md-6">
+
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /.content -->
+</div>
+
+{{/layout}}
+
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<script>
+  // 에디터 설정 https://summernote.org/deep-dive/
+  $(function () {
+    // Summernote
+    $('.post-content').summernote({
+      height: 200,   //set editable area's height
+    });
+  })
+
+</script>
+<script src="js/app/posts.js"></script>

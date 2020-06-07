@@ -16,6 +16,7 @@ var main = {
         var data = {
             title: $('#title').val(),
             author: $('#author').val(),
+            category: $("input[name='category']:checked").val(),
             content: $('#content').val()
         };
 

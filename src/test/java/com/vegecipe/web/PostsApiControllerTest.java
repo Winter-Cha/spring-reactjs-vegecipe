@@ -1,10 +1,11 @@
 package com.vegecipe.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vegecipe.domain.posts.Posts;
-import com.vegecipe.domain.posts.PostsRepository;
-import com.vegecipe.web.dto.PostsSaveRequestDto;
-import com.vegecipe.web.dto.PostsUpdateRequestDto;
+import com.vegecipe.domain.community.Posts;
+import com.vegecipe.domain.community.PostsRepository;
+import com.vegecipe.domain.community.Category;
+import com.vegecipe.dto.community.PostsSaveRequestDto;
+import com.vegecipe.dto.community.PostsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,12 +61,13 @@ public class PostsApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "GUEST")
     public void Posts_등록된다() throws Exception {
         //given
         String title = "title";
         String content = "content";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
+                .category(Category.GENERAL)
                 .title(title)
                 .content(content)
                 .author("author")
@@ -89,11 +91,12 @@ public class PostsApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "GUEST")
     public void Posts_수정된다() throws Exception {
         //given
         Posts savedPosts = postsRepository.save(Posts.builder()
                 .title("title")
+                .category(Category.GENERAL)
                 .content("content")
                 .author("author")
                 .build());
