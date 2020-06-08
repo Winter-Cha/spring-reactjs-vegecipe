@@ -6,8 +6,11 @@ import com.vegecipe.dto.book.BooksResponseDto;
 import com.vegecipe.service.book.BooksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
@@ -16,12 +19,10 @@ public class BookController {
 
     private final BooksService booksService;
 
-    @GetMapping("/book")
-    public ModelAndView book() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/pages/book/books_list");
-        modelAndView.addObject("books", booksService.findAllDesc());
-        return modelAndView;
+    @RequestMapping( value = {"/book"}, method = RequestMethod.GET)
+    public String book(Model model) {
+        model.addAttribute("books", booksService.findAllDesc());
+        return "/pages/book/books_list";
     }
 
     @GetMapping("/book/write")
@@ -30,32 +31,30 @@ public class BookController {
     }
 
     @GetMapping("/book/update/{id}")
-    public ModelAndView bookUpdate(@PathVariable Long id) {
+    public String bookUpdate(@PathVariable Long id, Model model) {
         BooksResponseDto dto = booksService.findById(id);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/pages/book/books_update");
-        modelAndView.addObject("book", dto);
-        return modelAndView;
+        model.addAttribute("book", dto);
+        return "/pages/book/books_update";
     }
 
     @GetMapping("/book/view/{id}")
-    public ModelAndView bookView(@PathVariable Long id, @LoginUser SessionUser user ) {
+    public String bookView(@PathVariable Long id, @LoginUser SessionUser user, Model model ) {
         BooksResponseDto dto = booksService.findById(id);
         booksService.updateViewCnt(id);
         BooksResponseDto pre = booksService.findByIdPreBook(id);
         BooksResponseDto post = booksService.findByIdPostBook(id);
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/pages/book/books_view");
-        modelAndView.addObject("book", dto);
+        model.addAttribute("book", dto);
+
         // author check
         String authorEmail = dto.getAuthorEmail();
         if(user != null && user.getEmail().equals(authorEmail))
-            modelAndView.addObject("isAuthor", true);
-        modelAndView.addObject("pre_book", pre);
-        modelAndView.addObject("post_book", post);
+            model.addAttribute("isAuthor", true);
 
-        return modelAndView;
+        model.addAttribute("pre_book", pre);
+        model.addAttribute("post_book", post);
+
+        return "/pages/book/books_view";
     }
 
 }
