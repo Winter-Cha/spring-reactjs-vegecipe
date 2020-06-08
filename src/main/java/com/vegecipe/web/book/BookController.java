@@ -19,7 +19,7 @@ public class BookController {
 
     private final BooksService booksService;
 
-    @RequestMapping( value = {"/book"}, method = RequestMethod.GET)
+    @GetMapping("/book")
     public String book(Model model) {
         model.addAttribute("books", booksService.findAllDesc());
         return "/pages/book/books_list";

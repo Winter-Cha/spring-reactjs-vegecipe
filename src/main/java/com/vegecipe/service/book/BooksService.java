@@ -38,9 +38,6 @@ public class BooksService {
     }
 
     @Transactional(readOnly = true)
-
-
-
     public List<BooksListResponseDto> findAllDesc() {
         return booksRepository.findAllDesc().stream()
                 .map(BooksListResponseDto::new)
@@ -71,6 +68,7 @@ public class BooksService {
         }
     }
 
+    @Transactional
     public void updateViewCnt(Long id) {
         //booksRepository.updateViewCntById(id.toString());
         Books books = booksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
