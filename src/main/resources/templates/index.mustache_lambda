@@ -1,5 +1,4 @@
-{{>layout/header}}
-
+{{#layout}}
 <div class="content-wrapper">
     <section class='content'>
         <div class="container main-container">
@@ -8,13 +7,15 @@
                 <div class="main-img-center-box col-lg-4 col-md-4 col-sm-4 col-12">
                     <!-- small box -->
                     <a href="/community">
-                    <img src="../../dist/img/main/main-community.jpg" alt="Community" class="img-fluid img-rounded elevation-3" />
+                        <img src="../../dist/img/main/main-community.jpg" alt="Community" class="img-fluid img-rounded elevation-3" />
                     </a>
                 </div>
                 <!-- ./col -->
                 <div class="main-img-center-box col-lg-4 col-md-4 col-sm-4 col-12">
                     <!-- small box -->
+                    <a href="/book">
                     <img src="../../dist/img/main/main-book.jpg" alt="Book" class="img-fluid img-rounded elevation-3" />
+                    </a>
                 </div>
                 <!-- ./col -->
                 <div class="main-img-center-box col-lg-4 col-md-4 col-sm-4 col-12">
@@ -26,6 +27,4 @@
         </div>
     </section>
 </div>
-
-
-{{>layout/footer}}
+{{/layout}}
