@@ -44,19 +44,19 @@ public class IndexController {
     //public String book(Model model) {
     public String book() {
         //model.addAttribute("books", booksService.findAllDesc());
-        return "/pages/book/books_list";
+        return "pages/book/books_list";
     }
 
     @GetMapping("/book/write")
     public String bookWrite() {
-        return "/pages/book/books_write";
+        return "pages/book/books_write";
     }
 
     @GetMapping("/book/update/{id}")
     public String bookUpdate(@PathVariable Long id, Model model) {
         BooksResponseDto dto = booksService.findById(id);
         model.addAttribute("book", dto);
-        return "/pages/book/books_update";
+        return "pages/book/books_update";
     }
 
     @GetMapping("/book/view/{id}")
@@ -76,7 +76,7 @@ public class IndexController {
         model.addAttribute("pre_book", pre);
         model.addAttribute("post_book", post);
 
-        return "/pages/book/books_view";
+        return "pages/book/books_view";
     }
 
 }
