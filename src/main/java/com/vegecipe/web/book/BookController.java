@@ -16,13 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 @Controller
 public class BookController {
-    
+
     private final BooksService booksService;
 
     @GetMapping("/book")
     //public String book(Model model) {
-    public String book() {
-        //model.addAttribute("books", booksService.findAllDesc());
+    public String book(Model model) {
+        model.addAttribute("books", booksService.findAllDesc());
         return "pages/book/books_list";
     }
 
