@@ -19,19 +19,19 @@ public class CommunityController {
     public String community(Model model) {
         model.addAttribute("posts", postsService.findAllDesc());
         //return "/pages/community/posts_list";
-        return "/pre_page";
+        return "pre_page";
     }
 
     @GetMapping("/posts/write")
     public String postWrite() {
-        return "/pages/community/posts_write";
+        return "pages/community/posts_write";
     }
 
     @GetMapping("/posts/update/{id}")
     public String postUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
-        return "/pages/community/posts_update";
+        return "pages/community/posts_update";
     }
 
 }
