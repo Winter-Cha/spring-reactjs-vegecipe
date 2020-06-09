@@ -3,21 +3,21 @@ package com.vegecipe.web;
 import com.vegecipe.config.auth.LoginUser;
 import com.vegecipe.config.auth.dto.SessionUser;
 import com.vegecipe.domain.user.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Mustache.Compiler;
 import com.samskivert.mustache.Template.Fragment;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Map;
 
-@ControllerAdvice
-class LayoutAdvice {
+@RestControllerAdvice
+public class LayoutAdvice {
     private final Mustache.Compiler compiler;
 
     @Autowired
