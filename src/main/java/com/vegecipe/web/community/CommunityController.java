@@ -17,7 +17,7 @@ public class CommunityController {
 
     @GetMapping("/community")
     public String community(Model model) {
-        model.addAttribute("posts", postsService.findAllDesc());
+        //model.addAttribute("posts", postsService.findAllDesc());
         //return "/pages/community/posts_list";
         return "pre_page";
     }
