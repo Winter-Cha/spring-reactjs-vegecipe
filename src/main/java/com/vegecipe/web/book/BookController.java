@@ -42,8 +42,8 @@ public class BookController {
     public String bookView(@PathVariable Long id, @LoginUser SessionUser user, Model model ) {
         booksService.updateViewCnt(id);
         BooksResponseDto dto = booksService.findById(id);
-        //BooksResponseDto pre = booksService.findByIdPreBook(id);
-        //BooksResponseDto post = booksService.findByIdPostBook(id);
+        BooksResponseDto pre = booksService.findByIdPreBook(id);
+        BooksResponseDto post = booksService.findByIdPostBook(id);
 
         model.addAttribute("book", dto);
 
@@ -52,8 +52,8 @@ public class BookController {
         if(user != null && user.getEmail().equals(authorEmail))
             model.addAttribute("isAuthor", true);
 
-        //model.addAttribute("pre_book", pre);
-        //model.addAttribute("post_book", post);
+        model.addAttribute("pre_book", pre);
+        model.addAttribute("post_book", post);
 
         return "pages/book/books_view";
     }

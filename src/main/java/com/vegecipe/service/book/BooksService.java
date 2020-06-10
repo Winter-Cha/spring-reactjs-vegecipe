@@ -51,7 +51,7 @@ public class BooksService {
     }
 
     public BooksResponseDto findByIdPreBook(Long id) {
-        Books entity = booksRepository.findByIdPreBook(id.toString());
+        Books entity = booksRepository.findByIdPreBook(id);
         if (entity == null)
             return null;
         else{
@@ -60,7 +60,7 @@ public class BooksService {
     }
 
     public BooksResponseDto findByIdPostBook(Long id) {
-        Books entity = booksRepository.findByIdPostBook(id.toString());
+        Books entity = booksRepository.findByIdPostBook(id);
         if (entity == null)
             return null;
         else{
