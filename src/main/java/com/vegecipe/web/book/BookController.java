@@ -40,7 +40,7 @@ public class BookController {
 
     @GetMapping("/book/view/{id}")
     public String bookView(@PathVariable Long id, @LoginUser SessionUser user, Model model ) {
-        booksService.updateViewCnt(id);
+        //booksService.updateViewCnt(id);
         BooksResponseDto dto = booksService.findById(id);
         BooksResponseDto pre = booksService.findByIdPreBook(id);
         BooksResponseDto post = booksService.findByIdPostBook(id);
