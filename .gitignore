@@ -7,3 +7,7 @@ npm-debug.log
 .env
 .DS_Store
 application-oauth.properties
+out
+out/production/classes/generated/
+out/test/classes/generated_tests/
+src/test/java/com/vegecipe/service/
