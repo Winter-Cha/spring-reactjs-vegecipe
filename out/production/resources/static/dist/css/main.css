@@ -1,0 +1,17 @@
+@media (min-width: 1024px) {
+	.main-container {
+		padding-top: 120px;
+	}
+}
+
+.main-img-center-box {
+	text-align: center;
+	padding: 20px;
+}
+
+.ellipsis-text-box {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

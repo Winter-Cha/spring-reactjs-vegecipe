@@ -1,0 +1,113 @@
+{{#layout}}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Book</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    {{book.title}}
+                                </h4>
+                                <small class="">{{book.author}}</small>&nbsp;&nbsp;|&nbsp;&nbsp;<small class="">{{book.createdDate}}</small>
+
+                                <div class="float-right card-tools">
+                                    {{#pre_book}}
+                                    <a href="/book/view/{{pre_book.id}}" class="btn btn-tool" data-toggle="tooltip"
+                                       title="Previous"><i class="fas fa-chevron-left"></i></a>
+                                    {{/pre_book}}
+                                    {{#post_book}}
+                                    <a href="/book/view/{{post_book.id}}" class="btn btn-tool" data-toggle="tooltip"
+                                       title="Next"><i class="fas fa-chevron-right"></i></a>
+                                    {{/post_book}}
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <!-- info row -->
+                        <div class="row" style="min-height:400px">
+                            <div class="col-12">
+                                <br/>
+                                <br/>
+                                {{{book.content}}}
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+
+                        <!-- this row will not appear when printing -->
+                        <div class="row no-print">
+                            <div class="col-12">
+                                <div class="float-right">
+                                    {{#post_book}}
+                                    <a href="/book/view/{{post_book.id}}">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                style="max-width:400px;" data-toggle="tooltip"
+                                                title="{{post_book.title}}">
+                                            <span class="ellipsis-text-box"><i class="fas fa-share"></i> 다음글 : {{post_book.title}}</span>
+                                        </button>
+                                    </a>
+                                    {{/post_book}}
+                                    <a href="/book">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-list"></i> 목록</button>
+                                    </a>
+                                    <input type="hidden" id="id" name="id" value="{{book.id}}"/>
+                                    {{#isAuthor}}
+                                    <input type="hidden" id="authorEmail" name="authorEmail" value="{{layout.loginUserEmail}}"/>
+                                    <a href="/book/update/{{id}}">
+                                        <button type="button" class="btn btn-outline-info btn-sm"><i class="fas fa-pen-square"></i> 수정</button>
+                                    </a>
+                                    <button type="button" id="btn-delete" class="btn btn-outline-danger btn-sm" ><i class="far fa-trash-alt"></i> 삭제</button>
+                                    {{/isAuthor}}
+
+                                </div>
+                                <div class="float-left">
+                                    {{#pre_book}}
+                                    <a href="/book/view/{{pre_book.id}}">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                style="max-width:400px;" data-toggle="tooltip"
+                                                title="{{pre_book.title}}">
+                                            <span class="ellipsis-text-box"><i class="fas fa-reply"></i> 이전글 : {{pre_book.title}}</span>
+                                        </button>
+                                    </a>
+                                    {{/pre_book}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="tooltip">Hover over me
+                    <span class="tooltiptext">Tooltip text</span>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /.content -->
+</div>
+
+        {{/layout}}
+
+<script src="js/app/books.js"></script>
