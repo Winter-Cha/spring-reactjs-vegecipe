@@ -39,5 +39,11 @@ public class IndexController {
     }
 
 
+    @GetMapping("/vegecipe")
+    public String vegecipe(Model model) {
+        return "pre_page";
+    }
+
+
 
 }
