@@ -10,38 +10,34 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts extends BaseTimeEntity {
+public class ReComment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Category category;
-
     @Column(length = 500, nullable = false)
-    private String title;
-
-    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(nullable = false)
     private String author;
 
+    @Column(nullable = false)
+    private String authorEmail;
+
+    @ManyToOne
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
+
     @Builder
-    public Posts(Category category, String title, String content, String author) {
-        this.category = category;
-        this.title = title;
+    public ReComment( String content, String author, String authorEmail) {
         this.content = content;
         this.author = author;
+        this.authorEmail = authorEmail;
     }
 
     public void update(String title, String content) {
-        this.title = title;
         this.content = content;
     }
 
-    public String getSubjectKey() {
-        return this.category.getKey();
-    }
 }

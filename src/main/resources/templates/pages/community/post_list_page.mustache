@@ -1,0 +1,23 @@
+{{#posts}}
+<tr>
+    <td scope="col" class="d-none d-lg-table-cell text-center">{{id}}</td>
+    <td scope="col" class="d-none d-lg-table-cell text-center">{{category}}</td>
+    <td scope="col" class="d-none d-lg-table-cell"
+                    onclick="javascript:fn_v_post_view_post({{id}})"
+                    style="cursor: pointer;color:MediumBlue"><a>{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a></td>
+    <td scope="col" class="d-block d-lg-none d-lg-none" onclick="javascript:fn_v_post_view_post({{id}})" style="cursor: pointer;color:MediumBlue">
+        <p style="margin-bottom: 4px;">
+            <a style="color:MediumBlue">{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a>
+        </p>
+        <p style="margin: 0px;font-size: 11px; color: gray">
+            {{category}}&nbsp;&nbsp;|&nbsp;&nbsp;{{author}}&nbsp;&nbsp;|&nbsp;&nbsp;{{modifiedDate}}&nbsp;&nbsp;|&nbsp;&nbsp;조회&nbsp;&nbsp;{{viewCnt}}
+        </p>
+    </td>
+    <td scope="col" class="d-none d-lg-table-cell text-center">{{author}}</td>
+    <td scope="col" class="d-none d-lg-table-cell text-center">{{modifiedDate}}</td>
+    <td scope="col" class="d-none d-lg-table-cell text-center">{{viewCnt}}</td>
+</tr>
+{{/posts}}
+{{#isLast}}
+    <input type='hidden' id='isLast' name='isLast' />
+{{/isLast}}

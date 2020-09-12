@@ -1,0 +1,213 @@
+{{#layout}}
+
+<div class="content-wrapper" id="post-content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Community</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    {{post.title}}
+                                </h4>
+                                <small class="">{{post.author}}</small>&nbsp;&nbsp;|&nbsp;&nbsp;<small class="">{{post.createdDate}}</small>
+
+                                <div class="float-right card-tools">
+                                    {{#pre_post}}
+                                    <a href="/post/view/{{pre_post.id}}" class="btn btn-tool" data-toggle="tooltip"
+                                       title="Previous"><i class="fas fa-chevron-left"></i></a>
+                                    {{/pre_post}}
+                                    {{#post_post}}
+                                    <a href="/post/view/{{post_post.id}}" class="btn btn-tool" data-toggle="tooltip"
+                                       title="Next"><i class="fas fa-chevron-right"></i></a>
+                                    {{/post_post}}
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <!-- info row -->
+                        <div class="row" style="min-height:400px">
+                            <div class="col-12">
+                                <br/>
+                                <br/>
+                                {{{post.content}}}
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <!-- this row will not appear when printing -->
+                        <div class="row no-print">
+                            <div class="col-12">
+                                <div class="float-right">
+                                    {{#post_post}}
+                                    <a href="/post/view/{{post_post.id}}">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                style="max-width:400px;" data-toggle="tooltip"
+                                                title="{{post_post.title}}">
+                                            <span class="ellipsis-text-box"><i class="fas fa-share"></i></span>
+                                        </button>
+                                    </a>
+                                    {{/post_post}}
+                                    <!--<a href="/community">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-list"></i> 목록</button>
+                                    </a>-->
+                                    <input type="hidden" id="id" name="id" value="{{post.id}}"/>
+
+                                    <input type="hidden" id="authorEmail" name="authorEmail" value="{{layout.loginUserEmail}}"/>
+                                   <!-- <a href="/post/update/{{id}}">-->
+                                    <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#modal-password" id="btn-go-update"><i class="fas fa-pen-square"></i> 수정</button>
+                                    <!--</a>-->
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modal-password" id="btn-go-delete"><i class="far fa-trash-alt"></i> 삭제</button>
+
+
+                                </div>
+                                <div class="float-left">
+                                    {{#pre_post}}
+                                    <a href="/post/view/{{pre_post.id}}">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"
+                                                style="max-width:400px;" data-toggle="tooltip"
+                                                title="{{pre_post.title}}">
+                                            <span class="ellipsis-text-box"><i class="fas fa-reply"></i></span>
+                                        </button>
+                                    </a>
+                                    {{/pre_post}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="postId" name="postId" value="{{post.id}}"/>
+                <div class="col-md-12" id="comment-target">
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- TODO: 커뮤니티 글목록  -->
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="/post/write" class="btn btn-outline-secondary btn-sm float-right"><i class="fas fa-pen-square"></i> 글쓰기</a>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container">
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <table class="table table-striped projects">
+                                <thead>
+                                <tr class="d-none d-lg-table-row">
+                                    <th class="text-center" style="width: 10%">번호</th>
+                                    <th class="text-center" style="width: 10%">말머리</th>
+                                    <th class="text-center" style="width: 50%">제목</th>
+                                    <th class="text-center" style="width: 10%">글쓴이</th>
+                                    <th class="text-center" style="width: 10%">작성일</th>
+                                    <th class="text-center" style="width: 10%">조회</th>
+                                </tr>
+                                </thead>
+                                <tbody id="post-list-target">
+                                </tbody>
+                                <tr id="get-more-list" style="display:none">
+                                    <td scope="col" colspan="6"  class="d-none d-lg-table-cell text-center">
+                                        <p style="margin-bottom: 4px;">
+                                            <a onclick="javascript:fn_v_getMoreList()">더보기</a>
+                                        </p>
+                                    </td>
+                                    <td scope="col" class="d-block d-lg-none d-lg-none text-center">
+                                        <p style="margin-bottom: 4px;">
+                                            <a onclick="javascript:fn_v_getMoreList()">더보기</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="col" colspan="6">
+                                        <ul class="pagination justify-content-center" id="post-pagination-ul">
+                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" id="post-tot-cnt" name="post-tot-cnt" value="{{postTotCnt}}"/>
+                            <input type="hidden" id="page" name="page" value="{{page}}"/>
+                            <input type="hidden" id="size" name="size" value="{{size}}"/>
+                            <input type="hidden" id="sort" name="sort" value="{{sort}}"/>
+                            <input type="hidden" id="page-block-cnt" name="page-block-cnt" value="{{page-block-cnt}}"/>
+                            <input type="hidden" id="page-block-index" name="page-block-index" value="{{page-block-index}}"/>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.container -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.container -->
+        <div class="modal fade" id="modal-password">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">비밀번호 확인</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group input-group-sm mb-0">
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control-sm" maxlength="10" placeholder="Password" id="password" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-outline-info btn-sm" id="btn-password-check">확인</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </section>
+    <!-- /.content -->
+</div>
+
+{{/layout}}
+<script src="js/app/post.js"></script>
+<script src="js/app/post-view.js"></script>
+<script src="js/app/post-list-pagination.js"></script>

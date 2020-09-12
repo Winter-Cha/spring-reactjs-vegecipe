@@ -1,33 +1,39 @@
 package com.vegecipe.dto.community;
 
 import com.vegecipe.domain.community.Category;
-import com.vegecipe.domain.community.Posts;
+import com.vegecipe.domain.community.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class PostsSaveRequestDto {
+public class PostSaveRequestDto {
     private Category category;
     private String title;
+    private String password;
     private String content;
     private String author;
+    private String authorEmail;
 
     @Builder
-    public PostsSaveRequestDto(Category category, String title, String content, String author) {
+    public PostSaveRequestDto(Category category, String title, String password, String content, String author, String authorEmail) {
         this.category = category;
         this.title = title;
+        this.password = password;
         this.content = content;
         this.author = author;
+        this.authorEmail = authorEmail;
     }
 
-    public Posts toEntity() {
-        return Posts.builder()
+    public Post toEntity() {
+        return Post.builder()
                 .category(category)
                 .title(title)
+                .password(password)
                 .content(content)
                 .author(author)
+                .authorEmail(authorEmail)
                 .build();
     }
 }

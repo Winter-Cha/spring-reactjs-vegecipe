@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 public enum Category {
 
     GENERAL("GENERAL", "일반"),
-    NOTICE("NOTICE", "공지"),
-    EVENT("EVENT", "행사")
+    INFORMATION("INFORMATION", "정보"),
+    EVENT("EVENT", "이벤트")
     ;
 
     private final String key;

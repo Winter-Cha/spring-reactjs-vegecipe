@@ -34,10 +34,10 @@
                         <tbody id="tbody">
                         {{#books}}
                         <tr>
-                            <td><a href="/book/view/{{id}}">{{title}}</a></td>
+                            <td><a href="/book/view/{{id}}" style="width:100%">{{title}}</a></td>
                             <td scope="col" class="d-none d-sm-table-cell text-center">{{author}}</td>
                             <td scope="col" class="d-none d-sm-table-cell text-center">{{createdDate}}</td>
-                            <td scope="col" class="d-none d-sm-table-cell text-center">{{viewCnt}}</td>
+                            <td scope="col" class="text-right">{{viewCnt}}</td>
                         </tr>
                         {{/books}}
                         </tbody>

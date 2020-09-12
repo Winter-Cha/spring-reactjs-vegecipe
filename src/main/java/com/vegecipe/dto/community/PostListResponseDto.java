@@ -1,6 +1,6 @@
-package com.vegecipe.dto.book;
+package com.vegecipe.dto.community;
 
-import com.vegecipe.domain.book.Books;
+import com.vegecipe.domain.community.Post;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -8,18 +8,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-public class BooksListResponseDto {
+public class PostListResponseDto {
     private Long id;
     private String title;
     private String author;
     private String createdDate;
     private String modifiedDate;
+    private String category;
     private int viewCnt;
+    private String commentCnt;
 
-    public BooksListResponseDto(Books entity) {
+    public PostListResponseDto(Post entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.author = entity.getAuthor();
+        this.category = entity.getCategory().getTitle();
         this.viewCnt = entity.getViewCnt();
 
         DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -35,5 +38,9 @@ public class BooksListResponseDto {
 
         String modifiedDateTime = entity.getCreatedDate().format(formatter);
         this.modifiedDate = modifiedDateTime;
+    }
+
+    public void setCommentCnt(String cnt){
+        this.commentCnt = cnt;
     }
 }

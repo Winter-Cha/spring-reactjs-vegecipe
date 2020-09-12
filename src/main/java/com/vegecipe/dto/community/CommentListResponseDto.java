@@ -1,26 +1,24 @@
-package com.vegecipe.dto.book;
+package com.vegecipe.dto.community;
 
-import com.vegecipe.domain.book.Books;
+import com.vegecipe.domain.community.Comment;
+import com.vegecipe.domain.community.Post;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-public class BooksListResponseDto {
+public class CommentListResponseDto {
     private Long id;
-    private String title;
+    private String text;
     private String author;
     private String createdDate;
     private String modifiedDate;
-    private int viewCnt;
 
-    public BooksListResponseDto(Books entity) {
+    public CommentListResponseDto(Comment entity) {
         this.id = entity.getId();
-        this.title = entity.getTitle();
+        this.text = entity.getText();
         this.author = entity.getAuthor();
-        this.viewCnt = entity.getViewCnt();
 
         DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.now();              // 오늘 날짜면 시간만 나오게 하기

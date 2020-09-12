@@ -20,12 +20,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable() //h2-console화면을 사용하기 위해 해당 옵션들을 disable합니다.
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/","/dist/**","/built/**","/plugins/**"
+                    .antMatchers("/","/dist/**","/built/**","/plugins/**","/js/app/**"
                                 ,"/h2-console/**", "/profile","/login").permitAll()
-                    .antMatchers("/community", "/api/v1/posts").permitAll()
+                    .antMatchers("/community", "/posts", "/post/view/**").permitAll()
                     .antMatchers("/book", "/book/view/**").permitAll()
                     .antMatchers("/vegecipe").permitAll()
-                    .antMatchers("/api/v1/posts/**", "/api/v1/posts").hasAnyRole(Role.GUEST.name(),Role.STAFF.name())
+                    .antMatchers("/post/write","/post/update", "/api/v1/post", "/api/v1/post/**").permitAll()
                     .antMatchers("/book/write", "/api/v1/books", "/api/v1/books/**").hasRole(Role.STAFF.name())
                     .anyRequest().authenticated()
                 .and()

@@ -24,39 +24,47 @@
                     <div class="card card-outline card-info">
                         <!-- form start -->
                         <form role="form" id="postWriteForm">
-                            <div class="card-body">
+                            <div class="card-body ">
+
                                 <div class="form-group">
-                                    <label for="title">제목</label>
+                                    <label for="title">제목 *</label>
                                     <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력하세요">
                                 </div>
-                                <div class="form-group">
-                                    <label for="author">작성자</label>
-                                    <input type="text" name="author" class="form-control" id="author" placeholder="작성자를 입력하세요">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="author">작성자</label>
+                                        <input type="text" name="author" class="form-control" id="author" value="채식인" readonly>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="password">비밀번호 *</label>
+                                        <input type="password" class="form-control" maxlength="10" placeholder="Password" name="password" id="password" />
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="category">말머리 </label>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn bg-olive active">
+                                    <label for="category" class="mr-10">말머리 *  : </label>
+                                    <div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
                                             <input type="radio" name="category" id="option1" value="GENERAL" autocomplete="off" checked> 일반
                                         </label>
-                                        <label class="btn bg-olive">
-                                            <input type="radio" name="category" id="option2" value="NOTICE" autocomplete="off"> 공지
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="category" id="option2" value="INFORMATION" autocomplete="off"> 정보
                                         </label>
-                                        <label class="btn bg-olive">
+                                        <label class="btn btn-secondary">
                                             <input type="radio" name="category" id="option3" value="EVENT" autocomplete="off"> 행사
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="content">내용</label>
+                                    <label for="content">내용 *</label>
                                     <textarea class="post-content" placeholder="" name="content" id="content"
                                     style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <a href="/community" class="btn btn-default float-right"><i class="fas fa-pen-square"></i> 취소</a>
-                                <button type="submit" class="btn btn-primary float-right" id=""><i class="fas fa-pen-square"></i> 등록</button>
+                                <input type="hidden" id="authorEmail" name="authorEmail" value="{{layout.loginUserEmail}}"/>
+                                <a href="/community" class="btn btn-outline-secondary btn-sm float-right"><i class="fas fa-pen-square"></i> 취소</a>
+                                <button type="submit" class="btn btn-outline-primary btn-sm float-right" id=""><i class="fas fa-pen-square"></i> 등록</button>
                             </div>
                         </form>
                     </div>
@@ -84,12 +92,34 @@
   $(function () {
     // Summernote
     $('.post-content').summernote({
+      toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['fontname', ['fontname']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['view', ['fullscreen', 'help']],
+      ],
       height: 200,   //set editable area's height
+      lang : 'ko-KR',
+      callbacks: {
+        onImageUpload : function(files, editor, welEditable) {
+           v_fn_sendFile(files[0], editor, welEditable);
+        },
+      }
     });
   })
 
+    // summernote 에디터에 이미지 업로드
+    function v_fn_sendFile(file,editor,welEditable) {
+        setTimeout(function(){
+            main.checkImageTag()
+        }, 100);
+        return false;
+    }
 </script>
-<script src="js/app/posts.js"></script>
+<script src="js/app/post.js"></script>
 <!-- jquery-validation -->
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="plugins/jquery-validation/additional-methods.min.js"></script>
@@ -103,29 +133,26 @@ $(document).ready(function () {
         return false;
       };
       main.save();
-    }
+    },
+    ignore: ":hidden:not(.post-content)"
   });
   $('#postWriteForm').validate({
     rules: {
       title: {
         required: true
       },
-      author: {
-        required: true
-      },
-      content: {
-        required: true
-      },
+      password: {
+        required: true,
+        minlength: 4
+      }
     },
     messages: {
       title: {
-        required: "Please enter a email address"
+        required: "제목을 입력하세요."
       },
-      author: {
-        required: "Please provide a password"
-      },
-      content: {
-        required: "Please provide a password"
+      password: {
+        required: "비밀번호를 입력하세요.",
+        minlength: "비밀번호를 최소 4자리 이상 입력하셔야 합니다. 쉬운 비밀번호는 타인이 수정 또는 삭제하기 쉬우니, 어려운 비밀번호를 입력해 주세요."
       }
     },
     errorElement: 'span',
@@ -140,5 +167,12 @@ $(document).ready(function () {
       $(element).removeClass('is-invalid');
     }
   });
+  $('#postWriteForm').each(function () {
+    if ($(this).data('validator')){
+        console.log($(this).data('validator').settings.ignore);
+        $(this).data('validator').settings.ignore = ".post-content *";
+        }
+    });
+
 });
 </script>

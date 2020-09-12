@@ -1,3 +1,4 @@
+/*
 package com.vegecipe.domain.community;
 
 import com.vegecipe.domain.book.Books;
@@ -72,3 +73,4 @@ public class BooksRepositoryTest {
         assertThat(books.getModifiedDate()).isAfter(now);
     }
 }
+*/
