@@ -30,7 +30,7 @@ public class CommunityController {
     public String community(Model model) {
         int total = postRepository.findAllDesc().size(); // 총 게시글 수
         model.addAttribute("postTotCnt",total);
-        return "/pages/community/post_list";
+        return "pages/community/post_list";
     }
 
     @GetMapping("/posts")
@@ -51,7 +51,7 @@ public class CommunityController {
         model.addAttribute("totCnt", pagedListHolder.getTotalElements());
         model.addAttribute("totPageCnt", pagedListHolder.getTotalPages());
         model.addAttribute("pageable", pagedListHolder.getPageable());
-        return "/pages/community/post_list_page";
+        return "pages/community/post_list_page";
         //return "pre_page";
     }
 
