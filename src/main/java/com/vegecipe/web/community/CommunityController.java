@@ -28,8 +28,7 @@ public class CommunityController {
 
     @GetMapping("/community")
     public String community(Model model) {
-        // 총 게시글 수
-        int total = postRepository.findAllDesc().size();
+        int total = postRepository.findAllDesc().size(); // 총 게시글 수
         model.addAttribute("postTotCnt",total);
         return "/pages/community/post_list";
     }
