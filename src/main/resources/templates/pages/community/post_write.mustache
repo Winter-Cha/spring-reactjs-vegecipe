@@ -28,7 +28,7 @@
 
                                 <div class="form-group">
                                     <label for="title">제목 *</label>
-                                    <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력하세요">
+                                    <input type="text" name="title" class="form-control" id="title" maxlength="100" placeholder="제목을 입력하세요">
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-6">
@@ -139,7 +139,8 @@ $(document).ready(function () {
   $('#postWriteForm').validate({
     rules: {
       title: {
-        required: true
+        required: true,
+        maxlength: 100
       },
       password: {
         required: true,
@@ -148,7 +149,8 @@ $(document).ready(function () {
     },
     messages: {
       title: {
-        required: "제목을 입력하세요."
+        required: "제목을 입력하세요.",
+        maxlength: "죄송합니다 100자까지만 입력 가능합니다.(┬┬﹏┬┬)"
       },
       password: {
         required: "비밀번호를 입력하세요.",
