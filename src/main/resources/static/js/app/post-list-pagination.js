@@ -162,7 +162,8 @@ function fn_v_post_view_post(postId){
 
     if (index == -1) {
         visitedPosts.push(id);
-        $("#post_id_"+postId).addClass('active');
+        $("#post_id_"+postId).addClass('active');              // 일반 화면
+        $("#post_id_xs_"+postId).addClass('active');           // 모바일 화면
 
     }
 
@@ -179,7 +180,8 @@ function fn_v_post_view_post(postId){
 function fn_v_post_visited_post_check(){
     var visitedPosts = JSON.parse(localStorage.getItem('visitedPosts')) || [];
     visitedPosts.forEach(function(visitedPost) {
-        $("#post_id_"+visitedPost).addClass('active');
+        $("#post_id_"+visitedPost).addClass('active');              // 일반 화면
+        $("#post_id_xs_"+visitedPost).addClass('active');           // 모바일 화면
     });
 }
 

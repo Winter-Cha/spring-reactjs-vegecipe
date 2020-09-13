@@ -2,12 +2,12 @@
 <tr>
     <td scope="col" class="d-none d-lg-table-cell text-center">{{id}}</td>
     <td scope="col" class="d-none d-lg-table-cell text-center">{{category}}</td>
-    <td scope="col" class="d-none d-lg-table-cell"
-                    style="cursor: pointer;color:MediumBlue">
-        <a id="post_id_{{id}}" class="post-link" onclick="javascript:fn_v_post_view_post({{id}})">{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a></td>
+    <td scope="col" class="d-none d-lg-table-cell" style="cursor: pointer;color:MediumBlue;">
+        <a id="post_id_{{id}}" class="post-link" onclick="javascript:fn_v_post_view_post({{id}})">{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a>
+    </td>
     <td scope="col" class="d-block d-lg-none d-lg-none" onclick="javascript:fn_v_post_view_post({{id}})" style="cursor: pointer;color:MediumBlue">
-        <p style="margin-bottom: 4px;">
-            <a style="color:MediumBlue">{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a>
+        <p style="margin-bottom: 4px;cursor: pointer;color:MediumBlue;">
+            <a id="post_id_xs_{{id}}" class="post-link">{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a>
         </p>
         <p style="margin: 0px;font-size: 11px; color: gray">
             {{category}}&nbsp;&nbsp;|&nbsp;&nbsp;{{author}}&nbsp;&nbsp;|&nbsp;&nbsp;{{modifiedDate}}&nbsp;&nbsp;|&nbsp;&nbsp;조회&nbsp;&nbsp;{{viewCnt}}
