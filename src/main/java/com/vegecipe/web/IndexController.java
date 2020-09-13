@@ -41,7 +41,7 @@ public class IndexController {
 
     @GetMapping("/vegecipe")
     public String vegecipe(Model model) {
-        return "pre_page";
+        return "pages/vegecipe/vegecipe_about";
     }
 
 
