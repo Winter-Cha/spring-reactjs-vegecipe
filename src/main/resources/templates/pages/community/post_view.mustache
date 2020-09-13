@@ -132,15 +132,15 @@
                                 </thead>
                                 <tbody id="post-list-target">
                                 </tbody>
-                                <tr id="get-more-list" style="display:none">
-                                    <td scope="col" colspan="6"  class="d-none d-lg-table-cell text-center">
+                                <tr id="get-more-list" class="get-more-list" style="display:none">
+                                    <td scope="col" colspan="6"  class="d-none d-lg-table-cell text-center" onclick="javascript:fn_v_getMoreList()">
                                         <p style="margin-bottom: 4px;">
-                                            <a onclick="javascript:fn_v_getMoreList()">더보기</a>
+                                            <a>➕더보기</a>
                                         </p>
                                     </td>
-                                    <td scope="col" class="d-block d-lg-none d-lg-none text-center">
+                                    <td scope="col" class="d-block d-lg-none d-lg-none text-center" onclick="javascript:fn_v_getMoreList()">
                                         <p style="margin-bottom: 4px;">
-                                            <a onclick="javascript:fn_v_getMoreList()">더보기</a>
+                                            <a>➕더보기</a>
                                         </p>
                                     </td>
                                 </tr>
@@ -166,6 +166,40 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
+                    <!-- Search -->
+                    <div class="row">
+                        <div class="form-group col-2">
+                        </div>
+                        <div class="form-group col-2">
+                            <div class="btn-group btn-group-toggle btn-group-sm float-right" data-toggle="buttons">
+                                {{#srhType}}
+                                <label class="btn btn-secondary {{#T}}active{{/T}}">
+                                    <input type="radio" name="srhType" id="option1" value="T" autocomplete="off" {{#T}}checked{{/T}}> 제목
+                                </label>
+                                <label class="btn btn-secondary {{#TC}}active{{/TC}}">
+                                    <input type="radio" name="srhType" id="option2" value="TC" autocomplete="off" {{#TC}}checked{{/TC}}> 제목+내용
+                                </label>
+                                {{/srhType}}
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <div class="input-group input-group-sm float-left">
+                                <!--remove autocomplete-->
+                                <input style="display:none" aria-hidden="true">
+                                <input type="password" style="display:none" aria-hidden="true">
+                                <!--remove autocomplete end  아래의 input box에 자동 완성 기능 막기 더 아래에 password가 있어. 자동 완성이 계속 됨-->
+                                <input class="form-control" type="search" placeholder="Search" id="post-search-text" value="{{srhText}}"/>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="javascript:fn_v_post_search();">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-2">
+                        </div>
+                    </div>
+                    <!-- /.Search -->
                 </div>
                 <!-- /.container -->
             </section>

@@ -7,11 +7,18 @@ function fn_v_post_pagination_change_page(pageNum){
     var page = parseInt($("#page").val());
     var size = parseInt($("#size").val());
     var sort = $("#sort").val();
+    // pagenation 설정
+    var pageBlockCnt = parseInt($("#page-block-cnt").val());                            // 5
+    var pageBlockIndex = parseInt($("#page-block-index").val());                        // 100 /20
 
     $(".page-item").removeClass( "active" );
     $("#post-page-li-"+pageNum).addClass( "active" );
 
-    var ajaxUrl = "/posts?page="+(page-1)+"&size="+size+"&sort="+sort;
+
+    var srhText = $("#post-search-text").val();
+    var srhType = $("input[name='srhType']:checked").val();
+
+    var ajaxUrl = "/posts?page="+(page-1)+"&size="+size+"&sort="+sort+"&pageBlockCnt="+pageBlockCnt+"&pageBlockIndex="+pageBlockIndex+"&srhText="+srhText+"&srhType="+srhType;
 
     $.ajax({
         type: "GET",
@@ -25,6 +32,8 @@ function fn_v_post_pagination_change_page(pageNum){
             }else{
                 $("#get-more-list").hide();
             }
+
+            fn_v_post_visited_post_check();             // 읽은 글 표시
         }
     });
 };
@@ -40,7 +49,9 @@ function fn_v_post_get_more_list(pageNum){
     var sort = $("#sort").val();
 
     var idx = parseInt($("#page-block-index").val()) + 1;
+    // pagenation 설정
     var pageBlockCnt = parseInt($("#page-block-cnt").val());                     // 5
+    var pageBlockIndex = parseInt($("#page-block-index").val());                        // 100 /20
     //alert( idx * pageBlockCnt  );
 
     if(pageNum > (idx * pageBlockCnt) ){
@@ -50,8 +61,9 @@ function fn_v_post_get_more_list(pageNum){
     $(".page-item").removeClass( "active" );
     $("#post-page-li-"+pageNum).addClass( "active" );
 
-
-    var ajaxUrl = "/posts?page="+(page-1)+"&size="+size+"&sort="+sort;
+    var srhText = $("#post-search-text").val();
+    var srhType = $("input[name='srhType']:checked").val();
+    var ajaxUrl = "/posts?page="+(page-1)+"&size="+size+"&sort="+sort+"&pageBlockCnt="+pageBlockCnt+"&pageBlockIndex="+pageBlockIndex+"&srhText="+srhText+"&srhType="+srhType;
 
     $.ajax({
         type: "GET",
@@ -66,6 +78,8 @@ function fn_v_post_get_more_list(pageNum){
             }else{
                 $("#get-more-list").hide();
             }
+
+            fn_v_post_visited_post_check();             // 읽은 글 표시
         }
     });
 };
@@ -131,13 +145,47 @@ function fn_v_getMoreList() {
 
 // 게시글  view page 링크
 function fn_v_post_view_post(postId){
+    $(this).addClass('active');
     var page = $("#page").val();
     var size = $("#size").val();
     var sort = $("#sort").val();
     // pagenation 설정
-    var pageBlockCnt = parseInt($("#page-block-cnt").val());                     // 5
+    var pageBlockCnt = parseInt($("#page-block-cnt").val());                            // 5
     var pageBlockIndex = parseInt($("#page-block-index").val());                        // 100 /20
-    window.location.href = "/post/view/"+parseInt(postId)+"/page?page="+page+"&size="+size+"&sort="+sort+"&pageBlockCnt="+pageBlockCnt+"&pageBlockIndex="+pageBlockIndex;
+
+    var visitedPosts = JSON.parse(localStorage.getItem('visitedPosts')) || [];
+
+    var id = postId;
+    var index = visitedPosts.indexOf(id);
+
+    //if (!id) return;
+
+    if (index == -1) {
+        visitedPosts.push(id);
+        $("#post_id_"+postId).addClass('active');
+
+    }
+
+    localStorage.setItem('visitedPosts', JSON.stringify(visitedPosts));
+
+    var srhText = $("#post-search-text").val();
+    var srhType = $("input[name='srhType']:checked").val();
+    window.location.href = "/post/view/"+parseInt(postId)+"/page?page="+page+"&size="+size+"&sort="+sort+"&pageBlockCnt="+pageBlockCnt+"&pageBlockIndex="+pageBlockIndex+"&srhText="+srhText+"&srhType="+srhType;
 
 }
 
+
+// 읽은 글 표시
+function fn_v_post_visited_post_check(){
+    var visitedPosts = JSON.parse(localStorage.getItem('visitedPosts')) || [];
+    visitedPosts.forEach(function(visitedPost) {
+        $("#post_id_"+visitedPost).addClass('active');
+    });
+}
+
+// 포스트 검색
+function fn_v_post_search(){
+    var srhText = $("#post-search-text").val();
+    var srhType = $("input[name='srhType']:checked").val();
+    window.location = '/community?srhText=' + srhText+"&srhType="+srhType;
+}

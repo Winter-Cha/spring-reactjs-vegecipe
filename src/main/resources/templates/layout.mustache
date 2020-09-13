@@ -33,6 +33,7 @@
     <!-- Vegecipe css -->
     <link rel="stylesheet" href="dist/css/main.css" />
 
+
 </head>
 <body class="hold-transition sidebar-collapse layout-top-nav">
 <div class="wrapper">
@@ -40,16 +41,19 @@
     <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
         <div class="container">
             <!--<Link to="/" class="navbar-brand brand-link">-->
-            <a href="/" class="navbar-brand brand-link">
-                <img src="../../dist/img/main/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="/" class="navbar-brand brand-link d-none d-sm-block">
+                <img src="../../dist/img/main/logo.jpg" alt="AdminLTE Logo" class="brand-image elevation-3" />
             </a>
-            <a href="/" class="navbar-brand brand-link">
+            <a href="/" class="navbar-brand brand-link d-none d-sm-block">
+                <span class="brand-text font-weight-bold">Vegecipe</span>
+            </a>
+            <a href="/" class="navbar-brand brand-link d-sm-none d-lg-none align-middle" style="width: 52%;text-align: right;font-size: 30px;">
                 <span class="brand-text font-weight-bold">Vegecipe</span>
             </a>
             <!--</Link>-->
-            <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="collapse navbar-collapse order-3" id="navbarCollapse">
                 <!--Left navbar links-->
@@ -72,8 +76,8 @@
                 </ul>
 
                 <!--SEARCH FORM-->
-                <!--
-                <form class="form-inline ml-0 ml-md-3">
+
+                <!--<form class="form-inline ml-0 ml-md-3">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" />
                         <div class="input-group-append">
@@ -82,8 +86,8 @@
                             </button>
                         </div>
                     </div>
-                </form>
-                -->
+                </form>-->
+
             </div>
 
             <!--Right navbar links-->

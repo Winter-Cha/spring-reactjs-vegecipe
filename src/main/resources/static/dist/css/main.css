@@ -15,3 +15,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* post 더보기 tr */
+.get-more-list { background-color:AliceBlue !important; }
+
+/* post 읽은 글 표시 */
+a.post-link.active { color:Purple; }

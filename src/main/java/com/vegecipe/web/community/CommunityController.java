@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -27,16 +30,34 @@ public class CommunityController {
     private final CommentRepository commentRepository;
 
     @GetMapping("/community")
-    public String community(Model model) {
+    public String community(Model model, @RequestParam(value = "srhText", required = false) String srhText , @RequestParam(value = "srhType", required = false) String srhType) {
         // 총 게시글 수
-        int total = postRepository.findAllDesc().size();
+        Long total = Long.valueOf(0);
+        HashMap srhTypeMap = new HashMap();
+        if(srhText == null) srhText = "";
+        if("TC".equals(srhType)){
+            total = postRepository.findByTitleContainingOrContentContaining(srhText,srhText);
+            srhTypeMap.put("TC", "checked");
+        } else {
+            total = postRepository.findByTitleContaining(srhText);
+            srhTypeMap.put("T", "checked");
+        }
         model.addAttribute("postTotCnt",total);
+        model.addAttribute("srhText", srhText);
+        model.addAttribute("srhType", srhTypeMap);
         return "pages/community/post_list";
     }
 
     @GetMapping("/posts")
-    public String community(Model model, Pageable pageable) {
-        Page<Post> pagedListHolder = postRepository.findAll(pageable);
+    public String community(Model model, Pageable pageable, @RequestParam String srhText, @RequestParam String srhType, @RequestParam String sort, @RequestParam Long pageBlockCnt, @RequestParam Long pageBlockIndex  ) {
+        Page<Post> pagedListHolder = null;
+
+        if("T".equals(srhType)){
+            pagedListHolder = postRepository.findByTitleContaining(srhText, pageable);
+        } else {
+            pagedListHolder = postRepository.findByTitleContainingOrContentContaining(srhText, srhText, pageable);
+        }
+
         if(!pagedListHolder.isLast()){
             model.addAttribute("isLast", true);
         }
@@ -52,6 +73,11 @@ public class CommunityController {
         model.addAttribute("totCnt", pagedListHolder.getTotalElements());
         model.addAttribute("totPageCnt", pagedListHolder.getTotalPages());
         model.addAttribute("pageable", pagedListHolder.getPageable());
+        model.addAttribute("sort", sort);
+        model.addAttribute("page", pageable.getPageNumber());
+        model.addAttribute("size", pageable.getPageSize());
+        model.addAttribute("page-block-cnt", pageBlockCnt);
+        model.addAttribute("page-block-index", pageBlockIndex);
         return "pages/community/post_list_page";
         //return "pre_page";
     }
@@ -85,13 +111,24 @@ public class CommunityController {
     }
 
     @GetMapping("/post/view/{id}/page")
-    public String bookView(@PathVariable Long id, Model model , Pageable pageable,@RequestParam String sort, @RequestParam Long pageBlockCnt, @RequestParam Long pageBlockIndex ) {
+    public String bookView(@PathVariable Long id, Model model , Pageable pageable, @RequestParam String srhText, @RequestParam String srhType, @RequestParam String sort, @RequestParam Long pageBlockCnt, @RequestParam Long pageBlockIndex ) {
         postService.updateViewCnt(id);
         PostResponseDto dto = postService.findById(id);
         model.addAttribute("post", dto);
-        // 총 게시글 수
-        int total = postRepository.findAllDesc().size();
-        model.addAttribute("postTotCnt",total);
+        Long total = Long.valueOf(0);
+        HashMap srhTypeMap = new HashMap();
+        if(srhText == null) srhText = "";
+        if("TC".equals(srhType)){
+            total = postRepository.findByTitleContainingOrContentContaining(srhText,srhText);
+            srhTypeMap.put("TC", "checked");
+        } else {
+            total = postRepository.findByTitleContaining(srhText);
+            srhTypeMap.put("T", "checked");
+        }
+
+        model.addAttribute("postTotCnt", total);
+        model.addAttribute("srhText", srhText);
+        model.addAttribute("srhType", srhTypeMap);
 
         model.addAttribute("sort", sort);
         model.addAttribute("page", pageable.getPageNumber());

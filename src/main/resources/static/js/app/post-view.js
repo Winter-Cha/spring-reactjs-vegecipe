@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    // 서치 엔터키 이벤트 핸들러
+    $('#post-search-text').on('keypress',function(e) {
+        if(e.which == 13) {
+            fn_v_post_search();
+        }
+    });
+
     // define variables
     var postId = $('#postId').val();
     var ajaxUrl = "/api/v1/post/" + postId + "/comments";
@@ -30,7 +37,14 @@ $(document).ready(function () {
     var size = parseInt($("#size").val());
     var sort = $("#sort").val();
 
-    var ajaxUrl = "/posts?page="+(page-1)+"&size="+size+"&sort="+sort;
+    // pagenation 설정
+    var pageBlockCnt = parseInt($("#page-block-cnt").val());                     // 5
+    var pageBlockIndex = parseInt($("#page-block-index").val());                        // 100 /20
+
+    var srhText = $("#post-search-text").val();
+    var srhType = $("input[name='srhType']:checked").val();
+    var ajaxUrl = "/posts?page="+(page-1)+"&size="+size+"&sort="+sort+"&pageBlockCnt="+pageBlockCnt+"&pageBlockIndex="+pageBlockIndex+"&srhText="+srhText+"&srhType="+srhType;
+
     $.ajax({
         type: "GET",
         url: ajaxUrl,
@@ -41,6 +55,7 @@ $(document).ready(function () {
             }else{
                 $("#get-more-list").hide();
             }
+            fn_v_post_visited_post_check();             // 읽은 글 표시
         }
     });
 
@@ -76,5 +91,8 @@ $(document).ready(function () {
     $("#post-page-li-"+page ).addClass( "active" );
     fn_v_post_pagination_change_page(page);
 });
+
+
+
 
 
