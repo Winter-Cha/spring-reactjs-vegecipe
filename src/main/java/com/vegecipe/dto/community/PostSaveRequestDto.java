@@ -5,8 +5,10 @@ import com.vegecipe.domain.community.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class PostSaveRequestDto {
     private Category category;
@@ -14,16 +16,16 @@ public class PostSaveRequestDto {
     private String password;
     private String content;
     private String author;
-    private String authorEmail;
+    private String authorIp;
 
     @Builder
-    public PostSaveRequestDto(Category category, String title, String password, String content, String author, String authorEmail) {
+    public PostSaveRequestDto(Category category, String title, String password, String content, String author, String authorIp) {
         this.category = category;
         this.title = title;
         this.password = password;
         this.content = content;
         this.author = author;
-        this.authorEmail = authorEmail;
+        this.authorIp = authorIp;
     }
 
     public Post toEntity() {
@@ -33,7 +35,7 @@ public class PostSaveRequestDto {
                 .password(password)
                 .content(content)
                 .author(author)
-                .authorEmail(authorEmail)
+                .authorIp(authorIp)
                 .build();
     }
 }

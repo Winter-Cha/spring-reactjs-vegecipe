@@ -12,7 +12,7 @@ public class PostResponseDto {
     private String title;
     private String content;
     private String author;
-    private String authorEmail;
+    private String authorIp;
     private String createdDate;
     private String modifiedDate;
     private String category;
@@ -23,7 +23,7 @@ public class PostResponseDto {
         this.title = entity.getTitle();
         this.content = entity.getContent();
         this.author = entity.getAuthor();
-        this.authorEmail = entity.getAuthorEmail();
+        this.authorIp = entity.getAuthorIp();
 
         this.viewCnt = entity.getViewCnt();
 

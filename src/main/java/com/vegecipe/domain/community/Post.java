@@ -36,19 +36,19 @@ public class Post extends BaseTimeEntity {
     private String author;
 
     @Column(nullable = false)
-    private String authorEmail;
+    private String authorIp;
 
     @Column(columnDefinition = "integer default 0")
     private int viewCnt;
 
     @Builder
-    public Post(Category category, String title, String password, String content, String author, String authorEmail) {
+    public Post(Category category, String title, String password, String content, String author, String authorIp) {
         this.category = category;
         this.title = title;
         this.password = password;
         this.content = content;
         this.author = author;
-        this.authorEmail = authorEmail;
+        this.authorIp = authorIp;
     }
 
     public void update(String title, String content) {
