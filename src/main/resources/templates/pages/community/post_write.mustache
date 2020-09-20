@@ -63,7 +63,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <input type="hidden" id="authorEmail" name="authorEmail" value="{{layout.loginUserEmail}}"/>
+                                <!--<input type="hidden" id="authorEmail" name="authorEmail" value="{{layout.loginUserEmail}}"/>-->
                                 <a href="/community" class="btn btn-outline-secondary btn-sm float-right"><i class="fas fa-pen-square"></i> 취소</a>
                                 <button type="submit" class="btn btn-outline-primary btn-sm float-right" id=""><i class="fas fa-pen-square"></i> 등록</button>
                             </div>
@@ -110,6 +110,9 @@
            v_fn_sendFile(files[0], editor, welEditable);
         },
       }
+    }).on("summernote.enter", function(we, e) {
+      $(this).summernote('pasteHTML', '<br>&VeryThinSpace;');
+      e.preventDefault();
     });
   })
 
