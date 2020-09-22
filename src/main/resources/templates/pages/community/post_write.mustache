@@ -111,9 +111,6 @@
            v_fn_sendFile(files[0], editor, welEditable);
         },
       }
-    }).on("summernote.enter", function(we, e) {
-      $(this).summernote('pasteHTML', '<br>&VeryThinSpace;');
-      e.preventDefault();
     });
   })
 
