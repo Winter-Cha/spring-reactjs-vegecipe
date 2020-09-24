@@ -37,7 +37,7 @@ var comment = {
             alert('댓글이 등록되었습니다.');
             fm_v_get_comments(postId);
         }).fail(function (error) {
-            alert('죄송합니다. 오류가 발생하였습니다!');
+            alert('죄송합니다. 오류가 발생하였습니다!. 글자수를 줄여보세요.');
             //alert(JSON.stringify(error));
         });
     },
