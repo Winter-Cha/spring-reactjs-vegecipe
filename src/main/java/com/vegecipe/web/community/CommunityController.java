@@ -1,12 +1,8 @@
 package com.vegecipe.web.community;
 
-import com.vegecipe.config.auth.dto.SeoDto;
-import com.vegecipe.config.auth.dto.SessionUser;
-import com.vegecipe.domain.Seo;
 import com.vegecipe.domain.community.CommentRepository;
 import com.vegecipe.domain.community.Post;
 import com.vegecipe.domain.community.PostRepository;
-import com.vegecipe.domain.user.User;
 import com.vegecipe.dto.community.PostListResponseDto;
 import com.vegecipe.service.community.PostService;
 import com.vegecipe.dto.community.PostResponseDto;
@@ -20,10 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
