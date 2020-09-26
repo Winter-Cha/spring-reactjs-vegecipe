@@ -1,8 +1,12 @@
 package com.vegecipe.web.community;
 
+import com.vegecipe.config.auth.dto.SeoDto;
+import com.vegecipe.config.auth.dto.SessionUser;
+import com.vegecipe.domain.Seo;
 import com.vegecipe.domain.community.CommentRepository;
 import com.vegecipe.domain.community.Post;
 import com.vegecipe.domain.community.PostRepository;
+import com.vegecipe.domain.user.User;
 import com.vegecipe.dto.community.PostListResponseDto;
 import com.vegecipe.service.community.PostService;
 import com.vegecipe.dto.community.PostResponseDto;
@@ -14,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +33,7 @@ public class CommunityController {
     private final PostService postService;
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final HttpSession httpSession;
 
     @GetMapping("/community")
     public String community(Model model, @RequestParam(value = "srhText", required = false) String srhText , @RequestParam(value = "srhType", required = false) String srhType) {
@@ -45,6 +51,12 @@ public class CommunityController {
         model.addAttribute("postTotCnt",total);
         model.addAttribute("srhText", srhText);
         model.addAttribute("srhType", srhTypeMap);
+
+        // SEO를 위한 데이터
+        model.addAttribute("seo_title", "커뮤니티");
+        model.addAttribute("seo_desc", "채식인들이 모여 편안하게 담소를 나누는 지극히 채식인에 편향된 커뮤니티입니다. ");
+        model.addAttribute("seo_image", "");
+
         return "pages/community/post_list";
     }
 
@@ -135,6 +147,19 @@ public class CommunityController {
         model.addAttribute("size", pageable.getPageSize());
         model.addAttribute("page-block-cnt", pageBlockCnt);
         model.addAttribute("page-block-index", pageBlockIndex);
+
+        String desc = "";
+        int len = dto.getContent().length();
+        if(len > 200){
+            desc = dto.getContent().substring(0,200);
+        }else{
+            desc = dto.getContent();
+        }
+        
+        // SEO를 위한 데이터
+        model.addAttribute("seo_title", dto.getTitle());
+        model.addAttribute("seo_desc", desc);
+        model.addAttribute("seo_image", "");
 
         return "pages/community/post_view";
     }

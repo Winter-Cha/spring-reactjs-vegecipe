@@ -23,6 +23,12 @@ public class BookController {
     //public String book(Model model) {
     public String book(Model model) {
         model.addAttribute("books", booksService.findAllDesc());
+
+        // SEO를 위한 데이터
+        model.addAttribute("seo_title", "비건책");
+        model.addAttribute("seo_desc", "안녕하세요 채식인 여러분!! 베지서피에서는 원서 <The minimalist Vegan>의 한글 번역을 제공하고 있습니다.");
+        model.addAttribute("seo_image", "");
+        
         return "pages/book/books_list";
     }
 
@@ -54,6 +60,19 @@ public class BookController {
 
         model.addAttribute("pre_book", pre);
         model.addAttribute("post_book", post);
+
+        String desc = "";
+        int len = dto.getContent().length();
+        if(len > 200){
+            desc = dto.getContent().substring(0,200);
+        }else{
+            desc = dto.getContent();
+        }
+
+        // SEO를 위한 데이터
+        model.addAttribute("seo_title", dto.getTitle());
+        model.addAttribute("seo_desc", desc);
+        model.addAttribute("seo_image", "");
 
         return "pages/book/books_view";
     }

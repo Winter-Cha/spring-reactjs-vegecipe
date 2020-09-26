@@ -29,7 +29,7 @@ public class IndexController {
     }*/
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
         return "index";
     }
 
@@ -41,6 +41,10 @@ public class IndexController {
 
     @GetMapping("/vegecipe")
     public String vegecipe(Model model) {
+        // SEO를 위한 데이터
+        model.addAttribute("seo_title", "베지서피는");
+        model.addAttribute("seo_desc", "채식인들이 앞뒤 없는 공격과 싸우지 않아도 되고 마음 편하게 소통할 수 있는 공간이 필요하다고 느껴 커뮤니티를 만들었습니다. 이곳은 채식의 찬반을 다투거나 논쟁하는 장소가 아니라, 채식인들이 모여 편안하게 담소를 나누는 지극히 채식인에 편향된 커뮤니티입니다. ");
+        model.addAttribute("seo_image", "");
         return "pages/vegecipe/vegecipe_about";
     }
 
