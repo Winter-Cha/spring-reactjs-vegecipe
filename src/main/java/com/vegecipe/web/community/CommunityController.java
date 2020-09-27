@@ -16,9 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Controller
@@ -58,10 +61,13 @@ public class CommunityController {
     public String community(Model model, Pageable pageable, @RequestParam String srhText, @RequestParam String srhType, @RequestParam String sort, @RequestParam Long pageBlockCnt, @RequestParam Long pageBlockIndex  ) {
         Page<Post> pagedListHolder = null;
 
+        // 공지글 제외 리스트
+        List<Long> idList = Arrays.asList(new Long[]{Long.valueOf(1), Long.valueOf(2), Long.valueOf(3), Long.valueOf(4), Long.valueOf(5)});
+
         if("T".equals(srhType)){
-            pagedListHolder = postRepository.findByTitleContaining(srhText, pageable);
+            pagedListHolder = postRepository.findByTitleContainingAndIdNotIn(srhText,idList, pageable);
         } else {
-            pagedListHolder = postRepository.findByTitleContainingOrContentContaining(srhText, srhText, pageable);
+            pagedListHolder = postRepository.findByTitleContainingOrContentContainingAndIdNotIn(srhText, srhText, idList, pageable);
         }
 
         if(!pagedListHolder.isLast()){
@@ -75,7 +81,21 @@ public class CommunityController {
                     if(cnt > 0) prd.setCommentCnt(cnt+"");
                     return prd;
                 }).collect(Collectors.toList());
-        model.addAttribute("posts", posts);
+
+        // page가 0이면 공지 뽑기
+        List<PostListResponseDto> notice = null;
+        if(pageable.getPageNumber() == 0) {
+            notice = postRepository.findByIdIn(idList).stream()
+                    .map(post -> {
+                        PostListResponseDto prd = new PostListResponseDto(post);
+                        int cnt = commentRepository.findByPostId(prd.getId()).size();
+                        if (cnt > 0) prd.setCommentCnt(cnt + "");
+                        return prd;
+                    }).collect(Collectors.toList());
+            model.addAttribute("posts", Stream.concat(notice.stream(),posts.stream()).collect(Collectors.toList()));
+        } else {
+            model.addAttribute("posts", posts);
+        }
         model.addAttribute("totCnt", pagedListHolder.getTotalElements());
         model.addAttribute("totPageCnt", pagedListHolder.getTotalPages());
         model.addAttribute("pageable", pagedListHolder.getPageable());
