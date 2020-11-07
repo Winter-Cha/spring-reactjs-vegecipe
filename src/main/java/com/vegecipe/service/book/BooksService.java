@@ -1,11 +1,13 @@
 package com.vegecipe.service.book;
 
+import com.vegecipe.domain.book.BookCommentRepository;
 import com.vegecipe.domain.book.Books;
 import com.vegecipe.domain.book.BooksRepository;
 import com.vegecipe.dto.book.BooksListResponseDto;
 import com.vegecipe.dto.book.BooksResponseDto;
 import com.vegecipe.dto.book.BooksSaveRequestDto;
 import com.vegecipe.dto.book.BooksUpdateRequestDto;
+import com.vegecipe.dto.community.PostListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class BooksService {
     private final BooksRepository booksRepository;
+    private final BookCommentRepository bookCommentRepository;
 
     @Transactional
     public Long save(BooksSaveRequestDto requestDto) {
@@ -40,8 +43,12 @@ public class BooksService {
     @Transactional(readOnly = true)
     public List<BooksListResponseDto> findAllDesc() {
         return booksRepository.findAllDesc().stream()
-                .map(BooksListResponseDto::new)
-                .collect(Collectors.toList());
+                .map(book -> {
+                    BooksListResponseDto prd = new BooksListResponseDto(book);
+                    int cnt = bookCommentRepository.findByBookId(prd.getId()).size();
+                    if(cnt > 0) prd.setCommentCnt(cnt+"");
+                    return prd;
+                }).collect(Collectors.toList());
     }
 
 

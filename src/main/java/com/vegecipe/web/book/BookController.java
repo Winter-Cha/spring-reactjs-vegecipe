@@ -22,6 +22,7 @@ public class BookController {
     @GetMapping("/book")
     //public String book(Model model) {
     public String book(Model model) {
+
         model.addAttribute("books", booksService.findAllDesc());
 
         // SEO를 위한 데이터

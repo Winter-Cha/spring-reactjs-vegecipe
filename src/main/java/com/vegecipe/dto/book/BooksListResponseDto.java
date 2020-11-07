@@ -15,6 +15,7 @@ public class BooksListResponseDto {
     private String createdDate;
     private String modifiedDate;
     private int viewCnt;
+    private String commentCnt;
 
     public BooksListResponseDto(Books entity) {
         this.id = entity.getId();
@@ -35,5 +36,9 @@ public class BooksListResponseDto {
 
         String modifiedDateTime = entity.getCreatedDate().format(formatter);
         this.modifiedDate = modifiedDateTime;
+    }
+
+    public void setCommentCnt(String cnt){
+        this.commentCnt = cnt;
     }
 }

@@ -33,10 +33,20 @@
                         <tbody id="tbody">
                         {{#books}}
                         <tr>
-                            <td><a href="/book/view/{{id}}" style="width:100%">{{title}}</a></td>
+                            <td scope="col" class="d-none d-lg-table-cell" style="cursor: pointer;color:MediumBlue;">
+                                <a href="/book/view/{{id}}" style="width:100%">{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a>
+                            </td>
+                            <td scope="col" class="d-block d-lg-none d-lg-none" onclick="javascript:fn_v_post_view_post({{id}})" style="cursor: pointer;color:MediumBlue">
+                                <p style="margin-bottom: 4px;cursor: pointer;color:MediumBlue;">
+                                    <a href="/book/view/{{id}}" style="width:100%">{{title}} {{#commentCnt}}<span style="color:Coral" >[{{commentCnt}}]</span> {{/commentCnt}}</a>
+                                </p>
+                                <p style="margin: 0px;font-size: 11px; color: gray">
+                                    {{author}}&nbsp;&nbsp;|&nbsp;&nbsp;{{modifiedDate}}&nbsp;&nbsp;|&nbsp;&nbsp;조회&nbsp;&nbsp;{{viewCnt}}
+                                </p>
+                            </td>
                             <td scope="col" class="d-none d-sm-table-cell text-center">{{author}}</td>
                             <td scope="col" class="d-none d-sm-table-cell text-center">{{createdDate}}</td>
-                            <td scope="col" class="text-right">{{viewCnt}}</td>
+                            <td scope="col" class="d-none d-sm-table-cell text-right">{{viewCnt}}</td>
                         </tr>
                         {{/books}}
                         </tbody>
