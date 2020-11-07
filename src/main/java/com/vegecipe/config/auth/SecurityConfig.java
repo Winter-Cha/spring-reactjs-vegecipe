@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/book", "/book/view/**").permitAll()
                     .antMatchers("/vegecipe","/googled7531326f1bd5fac.html").permitAll()
                     .antMatchers("/post/write","/post/update", "/api/v1/post", "/api/v1/post/**").permitAll()
+                    .antMatchers("/api/v1/book/**").permitAll()
                     .antMatchers("/book/write", "/api/v1/books", "/api/v1/books/**").hasRole(Role.STAFF.name())
                     .anyRequest().authenticated()
                 .and()
